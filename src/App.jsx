@@ -2,6 +2,7 @@ import React from 'react';
 
 // === IMPORT ALL COMPONENTS ===
 import GlobalParticleMesh from './components/GlobalParticleMesh';
+import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import BenefitsSection from './components/BenefitsSection';
 import CourseFlow from './components/CourseFlow';
@@ -27,6 +28,7 @@ export default function App() {
             {/* </div> */}
 
             {/* === GLOBAL HERO ANIMATION (PARTICLE MESH) === */}
+            <Navbar />
             <GlobalParticleMesh />
 
             <div className="relative z-10 w-full">

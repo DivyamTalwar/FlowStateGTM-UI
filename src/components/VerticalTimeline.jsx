@@ -120,7 +120,7 @@ const TimelineStep = ({ data, index, isLast }) => {
                         />
 
                         <motion.span
-                            className="relative z-10 text-[10px] md:text-sm font-black font-mono tracking-tighter"
+                            className="relative z-10 text-[11px] md:text-base font-black font-mono tracking-tighter"
                             animate={hasTriggered ? "active" : "inactive"}
                             variants={{
                                 inactive: { color: "#94A3B8" },
@@ -172,12 +172,12 @@ const TimelineStep = ({ data, index, isLast }) => {
                         }}
                         className="mb-3"
                     >
-                        <span className="px-3 py-1 text-[7px] md:text-[9px] font-bold tracking-[0.25em] text-[#CC3300] uppercase bg-zinc-950 border border-zinc-800 rounded-full shadow-lg">
+                        <span className="px-3 py-1 text-[8px] md:text-[10px] font-bold tracking-[0.25em] text-[#CC3300] uppercase bg-zinc-950 border border-zinc-800 rounded-full shadow-lg">
                             {data.pill}
                         </span>
                     </motion.div>
 
-                    <h3 className="text-xl md:text-3xl font-black text-zinc-900 mb-4 tracking-tighter leading-[1.1] perspective-1000">
+                    <h3 className="text-2xl md:text-4xl font-black text-zinc-900 mb-4 tracking-tighter leading-[1.1] perspective-1000">
                         {data.title.split(" ").map((word, i) => (
                             <span key={i} className="inline-block mr-2 pb-1">
                                 <motion.span
@@ -212,7 +212,7 @@ const TimelineStep = ({ data, index, isLast }) => {
                     </h3>
 
                     <motion.p
-                        className="text-xs md:text-sm leading-relaxed text-zinc-700 max-w-sm mb-6 font-medium"
+                        className="text-sm md:text-base leading-relaxed text-zinc-700 max-w-sm mb-6 font-medium"
                         variants={{
                             hidden: { y: 20, opacity: 0, filter: "blur(4px)" },
                             visible: {
@@ -233,7 +233,7 @@ const TimelineStep = ({ data, index, isLast }) => {
                             }
                         }}
                     >
-                        <button className="relative group flex items-center gap-2 px-6 py-3 text-[9px] md:text-[11px] bg-orange-600 text-white font-bold rounded-full overflow-hidden shadow-lg hover:bg-orange-700 transition-all active:scale-95">
+                        <button className="relative group flex items-center gap-2 px-6 py-3 text-[10px] md:text-[13px] bg-orange-600 text-white font-bold rounded-full overflow-hidden shadow-lg hover:bg-orange-700 transition-all active:scale-95">
                             <span className="relative z-10 uppercase tracking-widest">{data.cta}</span>
                             <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
                         </button>
@@ -269,10 +269,10 @@ export default function VerticalTimeline() {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                            transition={{ duration: 0.8, type: "spring" }}
+                            transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
                         >
-                            <h2 className="text-[8px] md:text-[10px] font-bold tracking-[0.6em] text-[#CC3300] uppercase mb-2">The Process.</h2>
-                            <p className="text-3xl md:text-5xl font-black tracking-tighter text-zinc-900 leading-tight">
+                            <h2 className="text-[9px] md:text-[12px] font-bold tracking-[0.6em] text-[#CC3300] uppercase mb-2">The Process.</h2>
+                            <p className="text-[34px] md:text-[54px] font-black tracking-tighter text-zinc-900 leading-tight">
                                 FlowState System<span className="text-orange-600">.</span>
                             </p>
                         </motion.div>
