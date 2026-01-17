@@ -217,7 +217,7 @@ const TimelineStep = ({ data, index, isLast }) => {
                             hidden: { y: 20, opacity: 0, filter: "blur(4px)" },
                             visible: {
                                 y: 0, opacity: 1, filter: "blur(0px)",
-                                transition: { duration: 0.6, ease: "easeOut" }
+                                transition: { duration: 0.45, ease: "easeOut" }
                             }
                         }}
                     >
@@ -246,7 +246,7 @@ const TimelineStep = ({ data, index, isLast }) => {
 
 export default function VerticalTimeline() {
     const sectionRef = useRef(null);
-    const isSectionInView = useInView(sectionRef, { once: true, amount: 0.1 });
+    const isSectionInView = useInView(sectionRef, { once: true, margin: "-30% 0px -30% 0px" });
 
     return (
         <section
@@ -269,7 +269,7 @@ export default function VerticalTimeline() {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                            transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+                            transition={{ duration: 0.3, type: "spring", stiffness: 150 }}
                         >
                             <h2 className="text-[9px] md:text-[12px] font-bold tracking-[0.6em] text-[#CC3300] uppercase mb-2">The Process.</h2>
                             <p className="text-[34px] md:text-[54px] font-black tracking-tighter text-zinc-900 leading-tight">
