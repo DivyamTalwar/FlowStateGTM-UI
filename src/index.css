@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === BASE STYLES === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FFF7ED;
+  color: #1c1917;
+  overflow-x: hidden;
+}
+
+/* === SELECTION COLORS === */
+::selection {
+  background-color: #f97316;
+  color: white;
+}
+
+/* === SCROLLBAR STYLING === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff7ed;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fdba74;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
+
+/* === DRAGON'S NEW BACKGROUND (PREMIUM DOT) === */
+.bg-tactical-dot {
+  background-color: #ffedd5; /* Tailwind orange-100 */
+  background-image: radial-gradient(#43140733 2px, transparent 2px);
+  background-size: 32px 32px;
+  animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+  from {
+      background-position: 0 0;
+  }
+  to {
+      background-position: -32px -32px;
+  }
+}
+
+/* === CUSTOM UTILITIES === */
+@layer utilities {
+  .perspective-500 {
+    perspective: 500px;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .hard-shadow {
+    box-shadow: 8px 8px 0px 0px #000000;
+  }
+  
+  .hard-shadow-sm {
+    box-shadow: 4px 4px 0px 0px #000000;
+  }
+  
+  .hard-shadow-orange {
+    box-shadow: 8px 8px 0px 0px #ea580c;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* === FONT CLASSES === */
+.font-anton {
+  font-family: 'Anton', sans-serif;
+}
+
+.font-outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-jakarta {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* === HERO TEXT STYLING === */
+.hero-text {
+  font-variation-settings: 'wght' 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+/* === TACTICAL BACKGROUND ANIMATION === */
+@keyframes tacticalDrift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-5%, -5%); }
+}
+
+.animate-tactical-drift {
+  animation: tacticalDrift 60s linear infinite alternate;
+}
+
+/* === GLASS EFFECTS === */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}

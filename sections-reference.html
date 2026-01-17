@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow State UI - All Sections Reference</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Anton&family=Outfit:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFF7ED;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Tactical Background */
+        .tactical-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.2;
+            overflow: hidden;
+        }
+
+        .tactical-bg::before {
+            content: '';
+            position: absolute;
+            inset: -100%;
+            width: 300%;
+            height: 300%;
+            background-image: radial-gradient(#ea580c 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            animation: drift 40s linear infinite alternate;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(-5%, -5%);
+            }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 6px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-logo {
+            width: 32px;
+            height: 32px;
+            background: #FF5F38;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-logo div {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 2px;
+            transform: rotate(45deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4px;
+        }
+
+        .nav-links button {
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-weight: 500;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .nav-cta {
+            background: white !important;
+            color: black !important;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            background: #FBF4F2;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 10vw, 128px);
+            font-weight: 800;
+            line-height: 0.92;
+            letter-spacing: -0.04em;
+            color: #111;
+        }
+
+        .hero p {
+            margin-top: 24px;
+            font-size: 18px;
+            color: #666;
+            max-width: 400px;
+        }
+
+        .hero-btns {
+            margin-top: 32px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            padding: 16px 32px;
+            background: #111;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary {
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Laptop Mockup */
+        .laptop {
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .laptop-screen {
+            width: 560px;
+            max-width: 90vw;
+            height: 350px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .laptop-inner {
+            margin: 6px;
+            background: white;
+            border-radius: 6px;
+            height: calc(100% - 12px);
+        }
+
+        .laptop-bar {
+            height: 32px;
+            background: white;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot-red {
+            background: #ff5f57;
+        }
+
+        .dot-yellow {
+            background: #febc2e;
+        }
+
+        .dot-green {
+            background: #28c840;
+        }
+
+        .laptop-base {
+            width: 600px;
+            max-width: 95vw;
+            height: 20px;
+            background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+            margin: 0 auto;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 24px;
+            position: relative;
+            background: #fff7ed;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 20px;
+            background: #ffedd5;
+            border: 1px solid black;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(36px, 6vw, 72px);
+            text-transform: uppercase;
+            line-height: 0.95;
+        }
+
+        .section-subtitle {
+            margin-top: 24px;
+            font-size: 18px;
+            color: #7a7a7a;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border: 1.5px solid black;
+            border-radius: 8px;
+            padding: 32px;
+            box-shadow: 8px 8px 0 #0b0b0b;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 14px 18px 0 #FF4000;
+        }
+
+        .card-lg {
+            grid-column: span 8;
+        }
+
+        .card-sm {
+            grid-column: span 4;
+        }
+
+        .card-orange {
+            background: #ffedd5;
+        }
+
+        .card-peach {
+            background: #fed7aa;
+        }
+
+        .card h3 {
+            font-family: 'Anton', sans-serif;
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #5e5e5e;
+            line-height: 1.6;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 50px;
+            border: 1px solid black;
+            box-shadow: 2px 2px 0 black;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #FF4000;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Course Flow */
+        .course-flow {
+            padding: 80px 24px;
+            background: #FDF8F5;
+            position: relative;
+        }
+
+        .flow-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+        }
+
+        .flow-row:nth-child(even) .flow-text {
+            order: 2;
+        }
+
+        .flow-text h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .flow-text h2 span {
+            color: #f97316;
+        }
+
+        .flow-text p {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .btn-orange {
+            padding: 12px 32px;
+            background: #f97316;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+        }
+
+        .flow-card {
+            background: #fff7ed;
+            border: 3px solid black;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .ui-tile {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .ui-tile-icon {
+            width: 48px;
+            height: 48px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f97316;
+            font-size: 20px;
+        }
+
+        .ui-tile h4 {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .ui-tile span {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            padding: 100px 24px;
+            background: white;
+            position: relative;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .timeline-header h2 {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            color: #CC3300;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .timeline-header p {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
+
+        .timeline-header p span {
+            color: #f97316;
+        }
+
+        .timeline-steps {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline-step {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 32px;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .timeline-num {
+            width: 80px;
+            height: 80px;
+            background: #f97316;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            font-family: monospace;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 40px;
+            top: 80px;
+            width: 3px;
+            height: calc(100% + 40px);
+            background: #eee;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            padding-top: 16px;
+        }
+
+        .timeline-pill {
+            display: inline-block;
+            padding: 6px 16px;
+            background: #1a1a1a;
+            color: #CC3300;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            border-radius: 50px;
+            margin-bottom: 24px;
+        }
+
+        .timeline-content h3 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .timeline-content p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-bottom: 24px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 24px;
+            background: #FFF7ED;
+            position: relative;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: #ffedd5;
+            border: 2px solid black;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 8px 8px 0 black;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.featured {
+            background: #fed7aa;
+            transform: translateY(-16px);
+        }
+
+        .pricing-card.dark {
+            background: #fdba74;
+        }
+
+        .pricing-name {
+            font-size: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pricing-name span {
+            font-size: 10px;
+            background: black;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+
+        .pricing-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+            min-height: 60px;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 24px;
+        }
+
+        .pricing-price span {
+            font-size: 14px;
+            font-weight: 700;
+            color: #666;
+        }
+
+        .pricing-features {
+            list-style: none;
+            flex: 1;
+            margin-bottom: 24px;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            width: 18px;
+            height: 18px;
+            background: black;
+            color: white;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 16px;
+            background: #f97316;
+            color: white;
+            border: 2px solid black;
+            border-radius: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 black;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 24px;
+            background: #FFF7ED;
+            position: relative;
+        }
+
+        .founder-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 48px;
+            max-width: 1300px;
+            margin: 0 auto 80px;
+            align-items: center;
+        }
+
+        .founder-img {
+            position: relative;
+            border-radius: 48px;
+            overflow: hidden;
+            border: 12px solid white;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .founder-img img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .founder-overlay {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 24px;
+            border-radius: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .founder-overlay p:first-child {
+            font-size: 10px;
+            font-weight: 900;
+            color: #f97316;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+        }
+
+        .founder-overlay p:last-of-type {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .founder-text h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+        }
+
+        .founder-text h1 span {
+            background: linear-gradient(to right, #f97316, #FF4000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .founder-text blockquote {
+            font-size: clamp(20px, 3vw, 36px);
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            margin-bottom: 32px;
+        }
+
+        .slider-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 48px;
+            box-shadow: 0 30px 60px rgba(234, 88, 12, 0.1);
+            display: grid;
+            grid-template-columns: auto 1fr 1.5fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .slider-meta {
+            font-size: 14px;
+            font-weight: 900;
+            color: #f97316;
+            font-family: monospace;
+        }
+
+        .slider-img {
+            width: 300px;
+            height: 400px;
+            border-radius: 32px;
+            overflow: hidden;
+        }
+
+        .slider-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-content h3 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .slider-content blockquote {
+            font-size: 28px;
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1.3;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 24px;
+            background: #fbf6f7;
+            position: relative;
+        }
+
+        .faq-item {
+            background: white;
+            border: 4px solid black;
+            margin-bottom: 22px;
+            box-shadow: 10px 10px 0 black;
+            max-width: 860px;
+            margin-inline: auto;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-8px) rotate(-0.5deg);
+            box-shadow: 16px 16px 0 black;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-question span {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 18px;
+        }
+
+        .faq-toggle {
+            width: 48px;
+            height: 48px;
+            background: #f97316;
+            border: 3px solid #ea580c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .faq-answer {
+            padding: 0 28px 24px;
+            color: #555;
+            line-height: 1.7;
+            display: none;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 100px 24px;
+            background: #FFF7ED;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .newsletter-card {
+            background: #FBFF9A;
+            border: 2px solid black;
+            border-radius: 8px;
+            box-shadow: 8px 8px 0 black;
+            padding: 72px;
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .newsletter-card h2 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 900;
+            margin-bottom: 24px;
+        }
+
+        .newsletter-card p {
+            font-size: 18px;
+            color: #333;
+            max-width: 520px;
+            margin: 0 auto 40px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 420px;
+            margin: 0 auto;
+            background: white;
+            border: 2px solid black;
+            border-radius: 50px;
+            padding: 4px 4px 4px 24px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .newsletter-form button {
+            width: 40px;
+            height: 40px;
+            background: black;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #EAF7F3;
+            padding: 48px 24px 32px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .footer-logo div {
+            width: 32px;
+            height: 32px;
+            background: black;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .footer-links a {
+            color: rgba(0, 0, 0, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-socials a {
+            width: 40px;
+            height: 40px;
+            background: #FBFF9A;
+            border: 1px solid black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 56px auto 0;
+            padding-top: 32px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+
+            .bento-grid,
+            .pricing-grid,
+            .flow-row,
+            .founder-grid,
+            .slider-card {
+                grid-template-columns: 1fr;
+            }
+
+            .card-lg,
+            .card-sm {
+                grid-column: span 1;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <div></div>
+        </div>
+        <div class="nav-links">
+            <button>Features</button>
+            <button>Pricing</button>
+        </div>
+        <button class="nav-links nav-cta">Get Started →</button>
+    </nav>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero">
+        <div class="tactical-bg"></div>
+        <h1>Create & Sell<br>Online Courses<br>Like a Pro</h1>
+        <p>The all-in-one platform to build, market, and sell your knowledge.</p>
+        <div class="hero-btns">
+            <button class="btn-primary">Start for free →</button>
+            <button class="btn-secondary">Compare plans</button>
+        </div>
+        <div class="laptop">
+            <div class="laptop-screen">
+                <div class="laptop-inner">
+                    <div class="laptop-bar">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="laptop-base"></div>
+        </div>
+    </section>
+
+    <!-- 2. BENEFITS SECTION -->
+    <section class="benefits">
+        <div class="tactical-bg"></div>
+        <div class="section-header">
+            <span class="badge">Benefits</span>
+            <h2 class="section-title">Everything is built to<br>help you teach better</h2>
+            <p class="section-subtitle">Powerful tools designed to simplify your workflow, engage your students, and
+                make learning stick.</p>
+        </div>
+        <div class="bento-grid">
+            <div class="card card-lg card-orange">
+                <div class="live-badge">
+                    <div class="live-dot"></div> Live Now
+                </div>
+                <h3>Live Interactive Sessions</h3>
+                <p>Host real-time classes with built-in polls, quizzes, and instant feedback loops. Keep students
+                    engaged.</p>
+            </div>
+            <div class="card card-sm">
+                <h3>Analytics that matter</h3>
+                <p>Track progress instantly. Identify students who need help before they fall behind.</p>
+            </div>
+            <div class="card card-sm">
+                <h3>Curriculum Planning</h3>
+                <p>Drag-and-drop lesson builder makes preparing for the semester a breeze.</p>
+            </div>
+            <div class="card card-lg card-peach">
+                <h3>Gamified Learning</h3>
+                <p>Boost participation with points, badges, and leaderboards that actually motivate students.</p>
+            </div>
+            <div class="card card-lg card-orange">
+                <span
+                    style="display:inline-block;background:black;color:#f97316;padding:4px 8px;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:16px">New
+                    Feature</span>
+                <h3>Automated Grading</h3>
+                <p>Save hours every week. AI-assisted grading handles multiple choice, leaving you to focus on feedback.
+                </p>
+            </div>
+            <div class="card card-sm">
+                <h3>Resource Library</h3>
+                <p>Share PDFs, videos, and links in one secure place accessible from any device.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. COURSE FLOW SECTION -->
+    <section class="course-flow">
+        <div class="tactical-bg"></div>
+        <div class="flow-row">
+            <div class="flow-text">
+                <h2>Build Courses <span>Fast</span></h2>
+                <p>Create engaging curriculum in minutes, not months. Drag, drop, and design beautiful learning paths.
+                </p>
+                <button class="btn-orange">Start Building →</button>
+            </div>
+            <div class="flow-card">
+                <div class="ui-tile">
+                    <div class="ui-tile-icon">💻</div>
+                    <div>
+                        <h4>Basic: HTML & CSS</h4><span>📹 12 Lessons</span>
+                    </div>
+                </div>
+                <div class="ui-tile">
+                    <div class="ui-tile-icon">🎨</div>
+                    <div>
+                        <h4>Branding Design</h4><span>👥 2.4k Students</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flow-row">
+            <div class="flow-card" style="background:#f0fdf4">
+                <div class="ui-tile">
+                    <div>
+                        <h4>Revenue Growth</h4><span
+                            style="background:#dcfce7;color:#16a34a;padding:4px 8px;border-radius:4px">+24%</span>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;height:100px;align-items:flex-end;margin-top:16px">
+                    <div style="flex:1;background:#fed7aa;height:40%;border-radius:4px 4px 0 0"></div>
+                    <div style="flex:1;background:#fed7aa;height:65%;border-radius:4px 4px 0 0"></div>
+                    <div style="flex:1;background:#f97316;height:85%;border-radius:4px 4px 0 0"></div>
+                    <div style="flex:1;background:#fed7aa;height:55%;border-radius:4px 4px 0 0"></div>
+                    <div style="flex:1;background:#fed7aa;height:70%;border-radius:4px 4px 0 0"></div>
+                </div>
+            </div>
+            <div class="flow-text">
+                <h2>Track.<br>Learn.<br><span>Improve.</span></h2>
+                <p>Visual insights that make sense. Understand where your students drop off and optimize your content.
+                </p>
+            </div>
+        </div>
+        <div class="flow-row">
+            <div class="flow-text">
+                <h2>Focus on your <span>Students</span></h2>
+                <p>Gamify the learning experience. Built-in leaderboards, badges, and community features keep engagement
+                    high.</p>
+            </div>
+            <div class="flow-card" style="background:#f5f3ff">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                    <h4 style="font-weight:700">Top Learners</h4><span>🏆</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #eee"><span
+                        style="color:#999;font-weight:700">1</span>
+                    <div style="width:32px;height:32px;background:#dbeafe;border-radius:50%"></div><span
+                        style="font-weight:600">Sarah Jenkins</span><span
+                        style="margin-left:auto;color:#16a34a;font-size:12px;font-weight:700">↑ 2</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #eee"><span
+                        style="color:#999;font-weight:700">2</span>
+                    <div style="width:32px;height:32px;background:#fef3c7;border-radius:50%"></div><span
+                        style="font-weight:600">Mike Ross</span><span
+                        style="margin-left:auto;color:#999;font-size:12px">-</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;padding:12px 0"><span
+                        style="color:#999;font-weight:700">3</span>
+                    <div style="width:32px;height:32px;background:#fce7f3;border-radius:50%"></div><span
+                        style="font-weight:600">Davina Claire</span><span
+                        style="margin-left:auto;color:#ef4444;font-size:12px;font-weight:700">↓ 1</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. VERTICAL TIMELINE -->
+    <section class="timeline">
+        <div class="tactical-bg"></div>
+        <div class="timeline-header">
+            <h2>The Process</h2>
+            <p>Data Flow<span>.</span></p>
+        </div>
+        <div class="timeline-steps">
+            <div class="timeline-step">
+                <div class="timeline-num">01</div>
+                <div class="timeline-line"></div>
+                <div class="timeline-content">
+                    <span class="timeline-pill">Data Sources</span>
+                    <h3>Connect Your Data</h3>
+                    <p>Seamlessly integrate all your key data sources — databases, spreadsheets, APIs and third-party
+                        tools.</p>
+                    <button class="btn-orange">Get Started →</button>
+                </div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-num">02</div>
+                <div class="timeline-line"></div>
+                <div class="timeline-content">
+                    <span class="timeline-pill">Smart Cleanup</span>
+                    <h3>Clean & Organize Instantly</h3>
+                    <p>Our smart engine auto-detects inconsistencies, outliers and formatting issues.</p>
+                    <button class="btn-orange">Get Started →</button>
+                </div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-num">03</div>
+                <div class="timeline-line"></div>
+                <div class="timeline-content">
+                    <span class="timeline-pill">Automated Transformations</span>
+                    <h3>Transform at Scale</h3>
+                    <p>Create reusable pipelines to normalize, enrich and aggregate data.</p>
+                    <button class="btn-orange">Explore Pipelines →</button>
+                </div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-num">04</div>
+                <div class="timeline-content">
+                    <span class="timeline-pill">Governance</span>
+                    <h3>Trust & Govern Data</h3>
+                    <p>Assign policies, access controls, and audit logs for reliable decision-making.</p>
+                    <button class="btn-orange">View Governance →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PRICING SECTION -->
+    <section class="pricing">
+        <div class="tactical-bg"></div>
+        <div class="section-header">
+            <div class="badge" style="background:white;box-shadow:4px 4px 0 #ea580c">🔴 Tactical Pricing</div>
+            <h2 class="section-title">Choose Your <span style="color:#ea580c">Mission</span> Level</h2>
+            <p class="section-subtitle">Deploy your academy with precision. Flexible plans built for creators.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-name">Starter</div>
+                <p class="pricing-desc">For creators who need simple tools to launch and manage online classes.</p>
+                <div class="pricing-price">€19.99 <span>/ MO</span></div>
+                <ul class="pricing-features">
+                    <li>1 course</li>
+                    <li>Up to 100 students</li>
+                    <li>Basic analytics</li>
+                    <li>Email support</li>
+                    <li>Custom domain</li>
+                </ul>
+                <button class="pricing-btn">Start for free →</button>
+            </div>
+            <div class="pricing-card featured">
+                <div class="pricing-name">Pro <span>Recommended</span></div>
+                <p class="pricing-desc">For professionals who want control, smart features and more freedom to grow.</p>
+                <div class="pricing-price">€49.99 <span>/ MO</span></div>
+                <ul class="pricing-features">
+                    <li>Unlimited courses</li>
+                    <li>Up to 1,000 students</li>
+                    <li>Automation tools</li>
+                    <li>Certificates</li>
+                    <li>Priority support</li>
+                </ul>
+                <button class="pricing-btn" style="background:#ea580c">Start for free →</button>
+            </div>
+            <div class="pricing-card dark">
+                <div class="pricing-name">Academy</div>
+                <p class="pricing-desc">For teams and schools that scale training delivery with full support.</p>
+                <div class="pricing-price">€99.99 <span>/ MO</span></div>
+                <ul class="pricing-features">
+                    <li>Unlimited courses</li>
+                    <li>Unlimited students</li>
+                    <li>Team accounts</li>
+                    <li>Onboarding</li>
+                    <li>Custom domain</li>
+                </ul>
+                <button class="pricing-btn" style="background:#c2410c">Start for free →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. TESTIMONIALS SECTION -->
+    <section class="testimonials">
+        <div class="tactical-bg"></div>
+        <div class="founder-grid">
+            <div class="founder-img">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800"
+                    alt="Founder">
+                <div class="founder-overlay">
+                    <div>
+                        <p>Founder & Visionary</p>
+                        <p>Alex Rivers</p>
+                    </div>
+                    <div
+                        style="width:48px;height:48px;background:#f97316;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white">
+                        ⚡</div>
+                </div>
+            </div>
+            <div class="founder-text">
+                <p
+                    style="font-size:10px;font-weight:900;color:#999;text-transform:uppercase;letter-spacing:0.4em;margin-bottom:16px">
+                    Strategic Mission</p>
+                <h1>We build <span>automated</span> futures.</h1>
+                <blockquote>"We know your problems. We know your target audience and how you can grow rapidly with
+                    high-tactical automation."</blockquote>
+                <div style="display:flex;gap:16px;flex-wrap:wrap">
+                    <button class="btn-orange" style="padding:20px 48px">Our Philosophy</button>
+                    <button
+                        style="padding:20px 48px;background:#1c1917;color:white;border:none;border-radius:16px;font-weight:900;text-transform:uppercase;letter-spacing:1px;cursor:pointer">Direct
+                        Access</button>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:24px;margin-bottom:48px;max-width:1200px;margin-inline:auto">
+            <div
+                style="width:56px;height:56px;background:#FFF7ED;border:1px solid #fed7aa;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#f97316;font-size:24px">
+                ❝</div>
+            <h2 style="font-size:28px;font-weight:900;text-transform:uppercase">Proven Success</h2>
+            <div style="flex:1;height:1px;background:#eee"></div>
+        </div>
+        <div class="slider-card">
+            <div class="slider-meta">01 / 03</div>
+            <div class="slider-img"><img
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400"
+                    alt="Sarah Chen"></div>
+            <div class="slider-content">
+                <p
+                    style="font-size:11px;font-weight:900;color:#f97316;text-transform:uppercase;letter-spacing:0.3em;margin-bottom:8px">
+                    CEO at TechFlow</p>
+                <h3>Sarah Chen</h3>
+                <blockquote style="margin-top:24px">"The automation tools provided here didn't just save us time; they
+                    fundamentally changed how our engineering team ships code."</blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FAQ SECTION -->
+    <section class="faq">
+        <div class="tactical-bg"></div>
+        <div class="section-header">
+            <div class="badge" style="background:#f97316;box-shadow:2px 2px 0 #FF4000">FAQ</div>
+            <h2 class="section-title">Frequently Asked<br>Questions</h2>
+            <p class="section-subtitle">Have questions? We're here to help.</p>
+        </div>
+        <div class="faq-item open">
+            <button class="faq-question"><span>How does the billing cycle work?</span>
+                <div class="faq-toggle">›</div>
+            </button>
+            <div class="faq-answer">We bill purely on a monthly basis. There are no surprise annual fees or lock-in
+                contracts. You can pause or cancel your subscription at any time.</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question"><span>Can I collaborate with my team?</span>
+                <div class="faq-toggle">›</div>
+            </button>
+            <div class="faq-answer">Absolutely. Our 'Pro' and 'Enterprise' plans support multi-seat licensing with
+                role-based permissions.</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question"><span>Is technical support included?</span>
+                <div class="faq-toggle">›</div>
+            </button>
+            <div class="faq-answer">Yes, 24/7 priority support is included with all paid tiers.</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question"><span>What integrates with this platform?</span>
+                <div class="faq-toggle">›</div>
+            </button>
+            <div class="faq-answer">We offer native integrations for Slack, Notion, Jira, and GitHub. Our REST API
+                allows custom integrations.</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question"><span>Do you offer refunds?</span>
+                <div class="faq-toggle">›</div>
+            </button>
+            <div class="faq-answer">We offer a 14-day money-back guarantee for all new customers.</div>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question"><span>How secure is my data?</span>
+                <div class="faq-toggle">›</div>
+            </button>
+            <div class="faq-answer">We are SOC2 Type II compliant and encrypt all data at rest and in transit using
+                AES-256.</div>
+        </div>
+    </section>
+
+    <!-- 8. NEWSLETTER SECTION -->
+    <section class="newsletter">
+        <div class="tactical-bg"></div>
+        <div class="newsletter-card">
+            <span class="badge" style="background:white;margin-bottom:20px">Newsletter</span>
+            <h2>JOIN OUR EXCLUSIVE E-LEARNING NEWSLETTER</h2>
+            <p>Receive insider tips, updates and resources to enhance your teaching and course creation.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="example@mail.com">
+                <button type="submit">→</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div>⚡</div> Didasko
+            </div>
+            <nav class="footer-links">
+                <a href="#">Benefits</a>
+                <a href="#">How it works</a>
+                <a href="#">Testimonials</a>
+                <a href="#">Pricing</a>
+            </nav>
+            <div class="footer-socials">
+                <a href="#">𝕏</a>
+                <a href="#">📷</a>
+                <a href="#">in</a>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 Didasko. All rights reserved.</div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+
+</html>
