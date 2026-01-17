@@ -98,7 +98,7 @@ export const NewsletterSection = () => {
         variants={containerVariants}
         className="
           relative z-10 w-full max-w-[1200px] 
-          bg-[#FBFF9A] 
+          bg-[#F4F4F2] 
           border-2 border-black 
           rounded-lg 
           hard-shadow
@@ -188,7 +188,7 @@ export const NewsletterSection = () => {
 
 export const Footer = () => {
   return (
-    <footer className="footer-root relative w-full bg-[#FED7AA] border-t-4 border-black text-black pt-12 pb-8 overflow-hidden">
+    <footer className="footer-root relative w-full bg-[#FED7AA] border-t-4 border-black text-black pt-12 pb-8 overflow-hidden" style={{ zoom: 0.85 }}>
       <FooterStyles />
 
       {/* Texture Overlay (Switched to Black for contrast on Orange) */}

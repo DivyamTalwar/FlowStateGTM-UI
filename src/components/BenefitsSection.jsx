@@ -91,7 +91,7 @@ const WordReveal = ({ text, className = "", delay = 0 }) => {
                     initial={{ y: "110%", rotate: 2 }}
                     animate={isInView ? { y: "0%", rotate: 0 } : {}}
                     transition={{
-                        duration: 0.8,
+                        duration: 0.6,
                         ease: [0.2, 0.65, 0.3, 0.9],
                         delay: delay + i * 0.05,
                     }}
@@ -179,7 +179,7 @@ const Card = ({ children, bgColor, className = "", delay = 0 }) => {
         offscreen: { y: 60, opacity: 0, scale: 0.9, rotateX: 10 },
         onscreen: {
             y: 0, opacity: 1, scale: 1, rotateX: 0,
-            transition: { type: "spring", stiffness: 60, damping: 18, mass: 1.2, delay: delay }
+            transition: { type: "spring", stiffness: 100, damping: 18, mass: 1.2, delay: delay }
         },
         hover: {
             y: -12, rotate: -1, scale: 1.015,
@@ -257,7 +257,7 @@ export default function BenefitsSection() {
                             <motion.svg
                                 initial={{ pathLength: 0, opacity: 0 }}
                                 animate={isInView ? { pathLength: 1, opacity: 0.6 } : {}}
-                                transition={{ duration: 1.2, ease: [0.2, 0.8, 0.2, 1], delay: 0.8 }}
+                                transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1], delay: 0.8 }}
                                 className="absolute -bottom-2 left-0 w-full h-3 text-[#FF4000] -z-10"
                                 viewBox="0 0 100 10"
                                 preserveAspectRatio="none"
@@ -270,7 +270,7 @@ export default function BenefitsSection() {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+                        transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
                         className="font-body text-[#7a7a7a] text-base max-w-2xl mx-auto leading-relaxed"
                     >
                         FlowState turns market and compliance change into calm, actionable navigation — so GTM stays in flow even when the market isn't.

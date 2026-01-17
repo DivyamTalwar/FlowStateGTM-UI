@@ -136,7 +136,7 @@ const TestimonialSlider = ({ reviews }) => {
     };
 
     return (
-        <div className="relative w-full min-h-[600px] overflow-hidden bg-white/70 backdrop-blur-lg rounded-[48px] border border-white/80 p-8 md:p-12 shadow-[0px_30px_60px_rgba(234,88,12,0.1)]">
+        <div className="relative w-full min-h-[600px] overflow-hidden bg-white/70 backdrop-blur-lg rounded-[48px] border-2 border-black p-8 md:p-12 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 h-full items-center">
 
                 {/* === Meta & Thumbnails === */}
@@ -178,7 +178,7 @@ const TestimonialSlider = ({ reviews }) => {
                             initial="enter"
                             animate="center"
                             exit="exit"
-                            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+                            transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
                             className="absolute inset-0 w-full h-full object-cover"
                         />
                     </AnimatePresence>
@@ -196,7 +196,7 @@ const TestimonialSlider = ({ reviews }) => {
                                 initial="enter"
                                 animate="center"
                                 exit="exit"
-                                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                             >
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className="w-8 h-[2px] bg-[#f97316]" />
@@ -249,12 +249,12 @@ export const FounderHero = () => {
                 viewport={{ once: true }}
                 className="lg:col-span-5 relative group"
             >
-                <div className="absolute -inset-4 bg-[#FF4000]/10 rounded-[50px] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                <div className="absolute -inset-4 bg-[#FF4000]/10 rounded-[50px] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="relative h-full aspect-[4/5] lg:aspect-auto lg:h-[650px] rounded-[48px] overflow-hidden border-[12px] border-white shadow-2xl">
                     <img
                         src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=1200"
                         alt="Founder"
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute bottom-10 left-10 right-10 bg-white/95 backdrop-blur-md p-8 rounded-[32px] shadow-2xl flex items-center justify-between">
                         <div>
@@ -272,7 +272,7 @@ export const FounderHero = () => {
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                 className="lg:col-span-7 flex flex-col justify-center lg:pl-16"
             >
                 <div className="mb-8 inline-flex items-center gap-4">
