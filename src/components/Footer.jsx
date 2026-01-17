@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Twitter, Instagram, Linkedin, Zap } from 'lucide-react';
+import { ArrowRight, Twitter, Instagram, Linkedin, Zap, Heart } from 'lucide-react';
 
-// --- STYLES & CONFIGURATION ---
-
-const FontStyles = () => (
+// --- FOOTER-SPECIFIC STYLES ---
+const FooterStyles = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
     
-    body {
+    .footer-root {
       font-family: 'Inter', sans-serif;
-      -webkit-font-smoothing: antialiased;
-      background-color: #FFF7ED;
+    }
+
+    .hard-shadow-white {
+      box-shadow: 4px 4px 0px 0px #ffffff;
+    }
+
+    .hard-shadow-black {
+      box-shadow: 4px 4px 0px 0px #000000;
     }
     
-    .hard-shadow {
-      box-shadow: 8px 8px 0px 0px #000000;
-    }
-    
-    @media (max-width: 768px) {
-      .hard-shadow {
-        box-shadow: 4px 4px 0px 0px #000000;
-      }
+    /* Selection Color Override */
+    .footer-root ::selection {
+      background-color: #000;
+      color: #FFF;
     }
   `}</style>
 );
@@ -186,56 +187,83 @@ export const NewsletterSection = () => {
 };
 
 export const Footer = () => {
-
   return (
-    <footer className="w-full bg-[#EAF7F3] pt-12 pb-8 border-t border-black/5" style={{ zoom: 0.5 }}>
-      <div className="max-w-[1200px] mx-auto px-6 md:px-8">
+    <footer className="footer-root relative w-full bg-[#FED7AA] border-t-4 border-black text-black pt-12 pb-8 overflow-hidden">
+      <FooterStyles />
 
-        {/* Top Row: 3 Columns */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-20 gap-10">
-          <div className="max-w-md">
-            <h2 className="text-7xl font-black uppercase text-white tracking-tighter mb-6">
+      {/* Texture Overlay (Switched to Black for contrast on Orange) */}
+      <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg%3E%3Cg fill=\'none\' fill-rule=\'evenodd%3E%3Cg fill=\'%23000000\' fill-opacity=\'1%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
+
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-8">
+
+        {/* Main Content Row */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10 mb-12">
+
+          {/* LEFT: Newsletter Section */}
+          <div className="max-w-md w-full">
+            <h2 className="text-3xl md:text-4xl font-[900] uppercase tracking-tighter text-black mb-4">
               Join the GTM Signal
             </h2>
-            <p className="text-stone-400 text-4xl mb-8 leading-relaxed">
+            <p className="text-stone-900 text-base md:text-lg mb-6 leading-relaxed font-medium">
               A weekly calm brief on GTM patterns in regulated and complex markets. Signals. Plays. No noise.
             </p>
-            <form className="flex gap-2">
+
+            <form className="flex gap-2 w-full max-w-sm" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="you@company.com"
-                className="bg-stone-900 border border-stone-800 text-white px-4 py-3 rounded-lg focus:outline-none focus:border-[#f97316] w-full"
+                className="bg-white border-2 border-black text-black px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-black w-full text-base placeholder-stone-500 transition-shadow hard-shadow-black"
               />
-              <button className="bg-[#f97316] text-white px-6 py-3 rounded-lg font-bold text-2xl hover:bg-[#ea580c] transition-colors">
+              <button className="bg-black text-white border-2 border-black px-5 py-3 rounded-lg font-bold hover:bg-stone-800 transition-transform active:translate-y-1 flex items-center justify-center hard-shadow-white">
                 →
               </button>
             </form>
           </div>
 
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-[#f97316] rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white fill-current" />
+          {/* RIGHT: Brand & Navigation */}
+          <div className="flex flex-col items-start lg:items-end gap-8 w-full lg:w-auto">
+
+            {/* Brand Logo */}
+            <div className="flex items-center gap-3 select-none">
+              <div className="w-10 h-10 bg-black border-2 border-black rounded flex items-center justify-center hard-shadow-white">
+                <Zap className="w-6 h-6 text-[#FED7AA] fill-[#FED7AA]" />
               </div>
-              <span className="text-5xl font-black text-white tracking-tighter">FlowStateGTM</span>
+              <span className="text-3xl font-[900] tracking-tighter uppercase text-black">FlowStateGTM</span>
             </div>
-            <div className="flex gap-8 text-stone-400 font-medium text-2xl">
-              <a href="#" className="hover:text-[#f97316] transition-colors">Benefits</a>
-              <a href="#" className="hover:text-[#f97316] transition-colors">How it works</a>
-              <a href="#" className="hover:text-[#f97316] transition-colors">Testimonials</a>
-              <a href="#" className="hover:text-[#f97316] transition-colors">Pricing</a>
-            </div>
+
+            {/* Links */}
+            <nav className="flex flex-wrap gap-6 md:gap-8 text-black font-bold text-lg md:text-xl">
+              {['Benefits', 'How it works', 'Testimonials', 'Pricing'].map((item) => (
+                <a key={item} href="#" className="hover:text-white transition-colors relative group">
+                  {item}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full group-hover:bg-white" />
+                </a>
+              ))}
+            </nav>
+          </div>
+
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-black/20 pt-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-stone-800 text-sm font-bold">
+            © 2026 FlowStateGTM. All rights reserved.
+          </p>
+
+          <div className="flex gap-6">
+            <a href="#" className="text-black hover:text-white transition-colors hover:-translate-y-1 transform duration-200"><Twitter size={20} /></a>
+            <a href="#" className="text-black hover:text-white transition-colors hover:-translate-y-1 transform duration-200"><Instagram size={20} /></a>
+            <a href="#" className="text-black hover:text-white transition-colors hover:-translate-y-1 transform duration-200"><Linkedin size={20} /></a>
           </div>
         </div>
 
-        <div className="border-t border-stone-800 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-stone-500 text-xl">© 2026 FlowStateGTM. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="text-stone-500 hover:text-white transition-colors"><Twitter size={20} /></a>
-            <a href="#" className="text-stone-500 hover:text-white transition-colors"><Instagram size={20} /></a>
-            <a href="#" className="text-stone-500 hover:text-white transition-colors"><Linkedin size={20} /></a>
-          </div>
-        </div>
+      </div>
+
+      {/* Decorative BG Text */}
+      <div className="absolute -bottom-4 left-0 w-full overflow-hidden pointer-events-none opacity-[0.05]">
+        <h1 className="text-[14vw] font-[900] leading-none text-center text-black whitespace-nowrap uppercase tracking-tighter">
+          Flow State
+        </h1>
       </div>
     </footer>
   );
@@ -246,7 +274,7 @@ export const Footer = () => {
 export default function FooterApp() {
   return (
     <div className="min-h-screen bg-[#FFF7ED] flex flex-col justify-between overflow-x-hidden">
-      <FontStyles />
+      <FooterStyles />
       <NewsletterSection />
       <Footer />
     </div>
