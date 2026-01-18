@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Twitter, Instagram, Linkedin, Zap, Heart } from 'lucide-react';
 
 // --- FOOTER-SPECIFIC STYLES ---
@@ -187,6 +187,7 @@ export const NewsletterSection = () => {
 };
 
 export const Footer = () => {
+  const { scrollYProgress } = useScroll();
   return (
     <footer className="footer-root relative w-full bg-[#FED7AA] border-t-4 border-black text-black pt-12 pb-8 overflow-hidden" style={{ zoom: 0.85 }}>
       <FooterStyles />
@@ -259,13 +260,16 @@ export const Footer = () => {
 
       </div>
 
-      {/* Decorative BG Text */}
-      <div className="absolute -bottom-4 left-0 w-full overflow-hidden pointer-events-none opacity-[0.05]">
-        <h1 className="text-[14vw] font-[900] leading-none text-center text-black whitespace-nowrap uppercase tracking-tighter">
-          Flow State
-        </h1>
+      {/* Decorative Kinetic Text */}
+      <div className="w-full overflow-hidden leading-none select-none opacity-[0.15] pointer-events-none absolute bottom-0 left-0 flex justify-center items-end">
+        <motion.div
+          className="text-[9.5vw] md:text-[160px] font-black text-black whitespace-nowrap tracking-tighter"
+          style={{ x: useTransform(scrollYProgress, [0.8, 1], ["10%", "0%"]) }}
+        >
+          FLOW STATE
+        </motion.div>
       </div>
-    </footer>
+    </footer >
   );
 };
 
