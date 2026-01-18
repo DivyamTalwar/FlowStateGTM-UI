@@ -112,11 +112,16 @@ const GaugeWidget = () => {
                 <div className="absolute top-0 left-0 w-24 h-24 rounded-full border-[10px] border-gray-100" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)' }}></div>
                 <motion.div
                     className="absolute top-0 left-0 w-24 h-24 rounded-full border-[10px] border-[#f97316]"
-                    style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)', rotate: 180 }}
-                    initial={{ rotate: 180 }}
-                    whileInView={{ rotate: 180 + 150 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 40, damping: 15, delay: 0.4 }}
+                    style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)' }}
+                    animate={{ rotate: [180, 540] }} // Rotating Sweep
+                    transition={{ duration: 3, ease: "linear", repeat: Infinity }}
+                />
+
+                {/* Radar Sweep Gradient */}
+                <motion.div
+                    className="absolute top-0 left-0 w-24 h-24 rounded-full bg-[conic-gradient(transparent,rgba(249,115,22,0.4))]"
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 3, ease: "linear", repeat: Infinity }}
                 />
             </div>
             <motion.div

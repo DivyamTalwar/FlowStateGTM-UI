@@ -188,7 +188,9 @@ const TacticalCard = ({ plan, index }) => {
 
 export default function PricingSection() {
     return (
-        <div className="relative min-h-[80vh] w-full flex flex-col justify-center py-12 lg:py-16">
+        <div className="relative min-h-[80vh] w-full flex flex-col justify-center py-12 lg:py-16 bg-stone-950 selection:bg-orange-500 selection:text-white overflow-hidden">
+            {/* Dark Grid Background */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
 
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
@@ -202,11 +204,11 @@ export default function PricingSection() {
                         </span>
                     </div>
 
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-center text-black uppercase leading-[0.9] tracking-tight mb-6 max-w-4xl">
+                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-center text-white uppercase leading-[0.9] tracking-tight mb-6 max-w-4xl">
                         Start serious. <span className="text-[#ea580c]">Stay in flow.</span>
                     </h1>
 
-                    <p className="text-gray-600 text-center text-lg md:text-xl max-w-2xl font-bold leading-relaxed opacity-80">
+                    <p className="text-gray-400 text-center text-lg md:text-xl max-w-2xl font-bold leading-relaxed opacity-80">
                         FlowScan sets your baseline. GTM Brain adds calm signals and weekly navigation as you learn and scale.
                     </p>
                 </div>
