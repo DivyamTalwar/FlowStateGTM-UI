@@ -17,15 +17,8 @@ import { NewsletterSection, Footer } from './components/Footer';
 export default function App() {
     return (
         <div className="min-h-screen w-full bg-white text-gray-900 font-sans relative selection:bg-orange-200 scroll-smooth">
-            {/* === GLOBAL BACKGROUND (TEMPORARILY DISABLED) === */}
-            {/* <div className="fixed inset-0 z-0 pointer-events-none"> */}
-            {/* The Dot Grid */}
-            {/* <div className="absolute inset-0 bg-tactical-dot w-[200%] h-[200%] -top-1/2 -left-1/2"></div> */}
-
-            {/* The Vignette: Crucial for blending edges so it doesn't look like a "box" */}
-            {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#ffedd5_120%)]"></div> */}
-            {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#ffedd5]/50 to-[#ffedd5]"></div> */}
-            {/* </div> */}
+            {/* === TACTICAL GRAIN OVERLAY === */}
+            <div className="fixed inset-0 z-[9999] pointer-events-none opacity-[0.035] mix-blend-overlay" style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}></div>
 
             {/* === GLOBAL HERO ANIMATION (PARTICLE MESH) === */}
             <Navbar />

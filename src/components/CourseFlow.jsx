@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Code2, PenTool, Video, Users, Trophy, ArrowUp, ArrowDown } from 'lucide-react';
 
 /**
  * CourseFlow Section - SaaS Feature Showcase
  * Animated arrows connecting feature cards with tactical orange theme
+ * Added "Runtime" Animations to static mockups
  */
 
 // --- Tactical Background Component ---
@@ -37,60 +37,6 @@ const TacticalBackground = () => {
     );
 };
 
-// --- Feature Card Component ---
-const FeatureCard = ({ children, className = "", bgColor = "bg-white" }) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            whileHover={{
-                y: -8,
-                scale: 1.01,
-                boxShadow: "12px 12px 0px rgba(0,0,0,0.08)"
-            }}
-            className={`
-        border-[3px] border-black rounded-3xl overflow-hidden
-        shadow-[6px_6px_0px_rgba(0,0,0,0.06)]
-        transition-all duration-500
-        ${bgColor}
-        ${className}
-      `}
-        >
-            {children}
-        </motion.div>
-    );
-};
-
-// --- UI Tile Component (Floating Cards) ---
-const UITile = ({ children, className = "", delay = 0 }) => {
-    return (
-        <motion.div
-            animate={{
-                y: [0, -6, 4, -3, 0],
-                rotate: [0, 1, -0.5, 0.5, 0],
-                x: [0, 2, -1, 1, 0]
-            }}
-            transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay
-            }}
-            whileHover={{ scale: 1.05, rotate: 0 }}
-            className={`
-        bg-white border-2 border-gray-200 rounded-2xl
-        shadow-[0_4px_12px_rgba(0,0,0,0.03)]
-        transition-transform duration-500
-        ${className}
-      `}
-        >
-            {children}
-        </motion.div>
-    );
-};
-
 // --- Sketch Arrow SVG Component ---
 const SketchArrow = ({ path, id, isVisible }) => {
     return (
@@ -115,72 +61,76 @@ const SketchArrow = ({ path, id, isVisible }) => {
     );
 };
 
-// --- Bar Chart Component ---
-const BarChart = ({ isVisible }) => {
-    const bars = [
-        { height: "40%", label: "Jan" },
-        { height: "65%", label: "Feb" },
-        { height: "85%", label: "Mar", highlight: true },
-        { height: "55%", label: "Apr" },
-        { height: "70%", label: "May" },
-    ];
+// --- RUNTIME ANIMATION OVERLAYS ---
 
-    return (
-        <div className="flex items-end justify-between h-32 gap-3 px-2">
-            {bars.map((bar, i) => (
-                <div key={i} className="w-full bg-gray-100 rounded-t-lg relative group h-full flex items-end">
-                    {bar.highlight && (
-                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded whitespace-nowrap z-20 shadow-lg border-b-2 border-orange-500">
-                            $12.5k
-                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45" />
-                        </div>
-                    )}
-                    <motion.div
-                        initial={{ height: 0 }}
-                        animate={isVisible ? { height: bar.height } : {}}
-                        transition={{ duration: 1.2, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                        className={`
-              w-full rounded-t-lg transition-colors
-              ${bar.highlight
-                                ? 'bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.4)]'
-                                : 'bg-orange-200/60 group-hover:bg-orange-500/40'
-                            }
-            `}
-                    />
-                    <span className={`absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs ${bar.highlight ? 'font-bold text-gray-800' : 'text-gray-400'}`}>
-                        {bar.label}
-                    </span>
-                </div>
-            ))}
-        </div>
-    );
-};
-
-// --- Leaderboard Row Component ---
-const LeaderboardRow = ({ rank, name, avatar, change, delay }) => {
-    const ChangeIcon = change > 0 ? ArrowUp : change < 0 ? ArrowDown : null;
-    const changeColor = change > 0 ? 'text-green-600' : change < 0 ? 'text-red-500' : 'text-gray-400';
-
-    return (
+// 1. Diagnostic Map: Circular Radar Sweep (Looking for stuck points)
+const DiagnosticRadarOverlay = () => (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-20">
         <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay }}
-            className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors"
-        >
-            <div className="flex items-center gap-3">
-                <span className="font-bold text-gray-400 w-4">{rank}</span>
-                <img src={avatar} alt={name} className="w-8 h-8 rounded-full bg-blue-100 border border-blue-200" />
-                <span className="font-semibold text-sm">{name}</span>
-            </div>
-            <div className={`flex items-center gap-1 text-xs font-bold ${changeColor}`}>
-                {ChangeIcon && <ChangeIcon className="w-3 h-3" />}
-                {change !== 0 ? Math.abs(change) : '-'}
-            </div>
-        </motion.div>
-    );
-};
+            className="absolute top-1/2 left-1/2 w-[150%] h-[150%] -translate-x-1/2 -translate-y-1/2 origin-center"
+            style={{
+                background: 'conic-gradient(from 0deg, transparent 0deg, transparent 340deg, rgba(234,88,12, 0.1) 360deg)',
+            }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        />
+        {/* Central Pulse */}
+        <motion.div
+            className="absolute top-1/2 left-1/2 w-32 h-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-orange-500/30"
+            animate={{ scale: [1, 2], opacity: [0.5, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+        />
+    </div>
+);
+
+// 2. Route Risk: Warning Pulse (Alerting user to risk)
+const RiskPulseOverlay = () => (
+    <div className="absolute inset-0 pointer-events-none rounded-3xl z-20">
+        {/* Warning Pulse Vignette */}
+        <motion.div
+            className="absolute inset-0 bg-orange-500/10 mix-blend-overlay"
+            animate={{ opacity: [0, 0.5, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Animated Dashed Path (Simulated) */}
+        <div className="absolute top-[55%] left-[10%] right-[10%] h-[2px] overflow-hidden">
+            <motion.div
+                className="w-full h-full bg-gradient-to-r from-transparent via-orange-500 to-transparent"
+                animate={{ x: ["-100%", "100%"] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            />
+        </div>
+    </div>
+);
+
+// 3. Weekly Signals: Focus/Execution Check
+const ExecutionShimmerOverlay = () => (
+    <div className="absolute inset-0 pointer-events-none rounded-3xl z-20 overflow-hidden">
+        {/* Button Shimmer (Stronger) */}
+        <div className="absolute bottom-[8%] left-[10%] right-[10%] h-[12%] rounded-md overflow-hidden">
+            <motion.div
+                className="w-full h-full bg-white/40 -skew-x-12"
+                initial={{ x: "-150%" }}
+                animate={{ x: "150%" }}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 1, ease: "easeInOut" }}
+            />
+        </div>
+
+        {/* "Success" Particles (Subtle float up) */}
+        <motion.div
+            className="absolute bottom-[20%] right-[20%] w-2 h-2 bg-green-400 rounded-full"
+            animate={{ y: -50, opacity: [1, 0] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+        />
+        <motion.div
+            className="absolute bottom-[25%] right-[25%] w-1.5 h-1.5 bg-orange-400 rounded-full"
+            animate={{ y: -40, opacity: [1, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, delay: 1.2 }}
+        />
+    </div>
+);
+
 
 // --- Main Component ---
 export default function CourseFlow() {
@@ -190,7 +140,6 @@ export default function CourseFlow() {
 
     const row1InView = useInView(row1Ref, { once: true, margin: "-25%" });
     const row2InView = useInView(row2Ref, { once: true, margin: "-25%" });
-    const row3InView = useInView(row3Ref, { once: true, margin: "-25%" });
 
     return (
         <section className="relative py-12 overflow-hidden" style={{ backgroundColor: 'transparent' }}>
@@ -204,7 +153,7 @@ export default function CourseFlow() {
 
             <main className="relative z-10 w-full max-w-6xl px-6 py-12 lg:px-12 lg:py-16 mx-auto bg-[#F8D6B3] rounded-[40px] border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)]">
 
-                {/* ROW 1: BUILD COURSES */}
+                {/* ROW 1: DIAGNOSTIC MAP (UNLOCK MOMENTUM) */}
                 <div ref={row1Ref} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16">
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
@@ -232,33 +181,23 @@ export default function CourseFlow() {
                     </motion.div>
 
                     <div className="order-1 md:order-2">
-                        <FeatureCard bgColor="bg-[#fff7ed]" className="p-6 aspect-[4/3] flex items-center justify-center relative">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-200 rounded-full blur-3xl opacity-60 -mr-10 -mt-10" />
-                            <div className="grid grid-cols-1 gap-4 w-full max-w-xs relative z-10">
-                                <UITile delay={0} className="p-4 flex items-center gap-4 -rotate-2">
-                                    <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 border border-orange-200">
-                                        <Code2 className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-gray-900">01. FlowScan</h4>
-                                        <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
-                                            <Video className="w-3 h-3" /> Establish Baseline
-                                        </div>
-                                    </div>
-                                </UITile>
-                                <UITile delay={2} className="p-4 flex items-center gap-4 rotate-2 ml-8">
-                                    <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center text-orange-500 border border-orange-100">
-                                        <PenTool className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-bold text-gray-900">02. Signal Layer</h4>
-                                        <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
-                                            <Users className="w-3 h-3" /> Turn on calm signals
-                                        </div>
-                                    </div>
-                                </UITile>
-                            </div>
-                        </FeatureCard>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                            viewport={{ once: true, margin: "-10%" }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="relative rounded-3xl overflow-hidden border-[3px] border-black shadow-[8px_8px_0px_rgba(0,0,0,0.1)] group bg-white"
+                        >
+                            {/* ANIMATION: Radar Sweep for Diagnostic */}
+                            <DiagnosticRadarOverlay />
+
+                            <img
+                                src="/images/ui_diagnostic_map.png"
+                                alt="GTM Diagnostic Map Network Graph"
+                                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-500 mix-blend-overlay" />
+                        </motion.div>
                     </div>
                 </div>
 
@@ -283,18 +222,26 @@ export default function CourseFlow() {
                     </motion.div>
                 </div>
 
-                {/* ROW 2: ANALYTICS */}
+                {/* ROW 2: ROUTE RISK (SIGNAL LAYER) */}
                 <div ref={row2Ref} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16">
                     <div className="order-1">
-                        <FeatureCard bgColor="bg-[#f0fdf4]" className="p-6 aspect-[4/3] flex items-end justify-center">
-                            <UITile delay={5} className="w-full max-w-sm p-6 pb-2">
-                                <div className="flex justify-between items-center mb-6">
-                                    <h4 className="font-bold text-gray-800">Weekly Clarity</h4>
-                                    <span className="text-xs font-semibold bg-green-100 text-green-700 px-2 py-1 rounded-md">+24%</span>
-                                </div>
-                                <BarChart isVisible={row2InView} />
-                            </UITile>
-                        </FeatureCard>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                            viewport={{ once: true, margin: "-10%" }}
+                            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                            className="relative rounded-3xl overflow-hidden border-[3px] border-black shadow-[8px_8px_0px_rgba(0,0,0,0.1)] group bg-white"
+                        >
+                            {/* ANIMATION: Risk Warning Pulse */}
+                            <RiskPulseOverlay />
+
+                            <img
+                                src="/images/ui_route_risk.png"
+                                alt="GTM Route Timeline with Risk Alert"
+                                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-500 mix-blend-overlay" />
+                        </motion.div>
                     </div>
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
@@ -334,7 +281,7 @@ export default function CourseFlow() {
                     </motion.div>
                 </div>
 
-                {/* ROW 3: LEADERBOARD */}
+                {/* ROW 3: WEEKLY SIGNALS (NAVIGATION) */}
                 <div ref={row3Ref} className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
@@ -352,37 +299,23 @@ export default function CourseFlow() {
                         </p>
                     </motion.div>
                     <div className="order-1 md:order-2">
-                        <FeatureCard bgColor="bg-[#f5f3ff]" className="p-6 aspect-[4/3] flex items-center justify-center">
-                            <UITile delay={0} className="w-full max-w-xs overflow-hidden">
-                                <div className="p-4 border-b border-gray-100 flex justify-between items-center">
-                                    <h4 className="font-bold text-gray-900">Top Signals This Week</h4>
-                                    <Trophy className="w-5 h-5 text-orange-500" />
-                                </div>
-                                <div className="p-2">
-                                    <LeaderboardRow
-                                        rank={1}
-                                        name="Sarah Jenkins"
-                                        avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-                                        change={2}
-                                        delay={0.1}
-                                    />
-                                    <LeaderboardRow
-                                        rank={2}
-                                        name="Competitor Repositioned"
-                                        avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka"
-                                        change={0}
-                                        delay={0.2}
-                                    />
-                                    <LeaderboardRow
-                                        rank={3}
-                                        name="Procurement Clause Trending"
-                                        avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=Jack"
-                                        change={-1}
-                                        delay={0.3}
-                                    />
-                                </div>
-                            </UITile>
-                        </FeatureCard>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                            viewport={{ once: true, margin: "-10%" }}
+                            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                            className="relative rounded-3xl overflow-hidden border-[3px] border-black shadow-[8px_8px_0px_rgba(0,0,0,0.1)] group bg-white"
+                        >
+                            {/* ANIMATION: Execution Shimmer */}
+                            <ExecutionShimmerOverlay />
+
+                            <img
+                                src="/images/ui_weekly_signals.png"
+                                alt="Weekly Signals Card with 3 Focus Items"
+                                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-colors duration-500 mix-blend-overlay" />
+                        </motion.div>
                     </div>
                 </div>
 
